@@ -1,19 +1,31 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { Room } from "../../interface/BookingSummary";
+
+interface PaginatedRooms {
+  length: number;
+  data: Room[];
+  total: number;
+  page: number;
+  limit: number;
+}
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8001/api/" }),
-  tagTypes: ["Room"], // ✅ add tagTypes for invalidation
+  baseQuery: fetchBaseQuery({ baseUrl: "https://haque-digital-backend.vercel.app/api/", credentials: "include" }),
+  tagTypes: ["Room", "Booking"],
   endpoints: (builder) => ({
-    // Get Rooms with params
-    getRooms: builder.query({
+    // Get Rooms with pagination
+    getRooms: builder.query<PaginatedRooms, { limit: number; page: number }>({
       query: ({ limit, page }) => ({
         url: "rooms",
         params: { limit, page },
       }),
       providesTags: (result) =>
         result
-          ? [...result.data.map(({ _id }) => ({ type: "Room" as const, id: _id })), { type: "Room", id: "LIST" }]
+          ? [
+              ...result.data.map((room) => ({ type: "Room" as const, id: room._id })),
+              { type: "Room", id: "LIST" },
+            ]
           : [{ type: "Room", id: "LIST" }],
     }),
 
@@ -23,6 +35,7 @@ export const api = createApi({
         url: "bookings/summary",
         params: { limit, page },
       }),
+      providesTags: [{ type: "Booking", id: "LIST" }],
     }),
 
     // Create booking
@@ -32,33 +45,48 @@ export const api = createApi({
         method: "POST",
         body: bookingData,
       }),
+      invalidatesTags: [
+        { type: "Room", id: "LIST" },
+        { type: "Booking", id: "LIST" },
+      ],
     }),
 
     // Create room
     createRoom: builder.mutation({
-      query: (roomsData) => ({
+      query: (roomData) => ({
         url: "rooms",
         method: "POST",
-        body: roomsData,
+        body: roomData,
       }),
       invalidatesTags: [{ type: "Room", id: "LIST" }],
     }),
 
-    // ✅ Delete room by ID
+    // Edit room
+    editRoom: builder.mutation({
+      query: ({ id, roomData }: { id: string; roomData: Partial<Room> }) => ({
+        url: `rooms/${id}`,
+        method: "PATCH",
+        body: roomData,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: "Room", id }],
+    }),
+
+    // Delete room
     deleteRoom: builder.mutation({
       query: (id: string) => ({
         url: `rooms/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Room", id }],
+      invalidatesTags: (_result, _error, id) => [{ type: "Room", id }],
     }),
   }),
 });
 
 export const {
   useGetRoomsQuery,
+  useBookingSummaryQuery,
   useCreateBookingMutation,
   useCreateRoomMutation,
-  useBookingSummaryQuery,
-  useDeleteRoomMutation, // ✅ added delete hook
+  useEditRoomMutation,
+  useDeleteRoomMutation,
 } = api;

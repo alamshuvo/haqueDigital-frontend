@@ -5,6 +5,7 @@ import MainLayout from "../Layout/MainLayout";
 import  Home from "../pages/Home";
 import CreateRoom from "../pages/CreateRoom";
 import BookingSummary from "../pages/BookingSummary";
+import ContactPage from "../pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path:"/booking-summary",
         element:<BookingSummary></BookingSummary>
+      },
+      {
+        path:"/contact",
+        element:<ContactPage></ContactPage>
       }
     ],
   },

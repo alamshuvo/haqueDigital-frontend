@@ -1,70 +1,82 @@
-# React + TypeScript + Vite
+# 🏨 Hotel Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **full-stack hotel booking system** built with **React (Vite + TypeScript)**, **Redux Toolkit Query**, **Node.js**, **Express**, and **MongoDB**.  
+This project allows users to browse rooms, check availability, create bookings, and view booking summaries with a responsive and modern UI.
 
-Currently, two official plugins are available:
+---
+## 🌍 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔗 **Frontend (Vercel):** [Hotel Booking Frontend](https://haque-digital-frontend.vercel.app/)  
+- 🔗 **Backend API (Vercel):** [Hotel Booking API](https://haque-digital-backend.vercel.app/api)  
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend (React + Vite + TypeScript)
+- 📱 **Responsive Design** (Desktop + Mobile views)
+- 🎨 **Framer Motion animations**
+- 🔄 **RTK Query** for API state management
+- 🛏 **Room listing with pagination**
+- 📖 **Booking summary table & mobile cards**
+- ⏳ **Loading animations**
+- 🔐 **Environment-based API handling**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Backend (Node.js + Express)
+- 🗄 **MongoDB with Mongoose**
+- 🔑 **Room CRUD APIs**
+- 📑 **Booking APIs (create + summary)**
+- 🛡 **Global error handler**
+- 🌍 **CORS configuration with allowed origins**
+- 🍪 **Cookie parser for authentication**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+------
+
+## ⚙️ Installation & Setup
+
+### Clone the Repository
+```bash
+git clone https://github.com/your-username/hotel-booking-system.git
+cd hotel-booking-system
+
+cd frontend
+npm install
+npm run dev
 ```
+### Future Improvements 
+``` 
+🔐 User authentication (JWT)
+📆 Booking calendar view
+💳 Payment integration
+👤 Admin dashboard for room & booking management
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
-# haqueDigital-frontend
+## 📂 Project Structure
+```
+src
+ ┣ Layout
+ ┃ ┗ MainLayout.tsx
+ ┣ assets
+ ┃ ┗ react.svg
+ ┣ components
+ ┃ ┣ ui
+ ┃ ┃ ┗ Loading.tsx
+ ┃ ┣ Footer.tsx
+ ┃ ┣ Hero.tsx
+ ┃ ┗ Navbar.tsx
+ ┣ interface
+ ┃ ┗ BookingSummary.ts
+ ┣ pages
+ ┃ ┣ BookingSummary.tsx
+ ┃ ┣ Contact.tsx
+ ┃ ┣ CreateRoom.tsx
+ ┃ ┣ Home.tsx
+ ┃ ┗ Rooms.tsx
+ ┣ redux
+ ┃ ┣ api
+ ┃ ┃ ┗ api.ts
+ ┃ ┗ store.ts
+ ┣ routes
+ ┃ ┗ route.tsx
+ ┣ index.css
+ ┣ main.tsx
+ ┗ vite-env.d.ts

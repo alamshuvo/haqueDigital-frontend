@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, Link } from 'react-router-dom';
 
@@ -128,17 +128,17 @@ const Navbar = () => {
           >
             <div className="pt-2 pb-3 space-y-1">
               <motion.div variants={mobileLinkVariants}>
-                <NavLink to="/" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
+                <NavLink to="/rooms" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
                   Rooms
                 </NavLink>
               </motion.div>
               <motion.div variants={mobileLinkVariants}>
-                <NavLink to="/rooms" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
+                <NavLink to="/create-room" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
                   Create Room
                 </NavLink>
               </motion.div>
               <motion.div variants={mobileLinkVariants}>
-                <NavLink to="/bookings" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
+                <NavLink to="/booking-summary" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700" onClick={toggleMobileMenu}>
                   Booking Summary
                 </NavLink>
               </motion.div>
