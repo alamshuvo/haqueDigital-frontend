@@ -36,9 +36,9 @@ This project allows users to browse rooms, check availability, create bookings, 
 ### Clone the Repository
 ```bash
 git clone https://github.com/your-username/hotel-booking-system.git
-cd hotel-booking-system
+cd project
 
-cd frontend
+
 npm install
 npm run dev
 ```
